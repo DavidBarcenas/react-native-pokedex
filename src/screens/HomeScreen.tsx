@@ -2,12 +2,10 @@ import React from 'react'
 import { StackScreenProps } from '@react-navigation/stack'
 import { Image, Pressable, StyleSheet, Text } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { usePokemoList } from '../hooks/usePokemoList'
 
 interface HomeProps extends StackScreenProps<any, any> { }
 
 export const HomeScreen = ({ navigation }: HomeProps) => {
-    usePokemoList()
     return (
         <SafeAreaView>
             <Image source={require('../assets/pokeball.png')} style={styles.img} />

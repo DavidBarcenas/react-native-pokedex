@@ -1,11 +1,13 @@
-import React from 'react'
-import { ActivityIndicator, Image, Text } from 'react-native'
+import React, { useMemo } from 'react'
+import { ActivityIndicator, Image, Text, View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { usePokemoList } from '../hooks/usePokemoList'
+import { PokemonCard } from '../components/PokemonCard';
+import { usePokemonList } from '../hooks/usePokemonList';
 
 export const PokedexScreen = () => {
-    const { pokemonList, getPokemons, isLoading } = usePokemoList()
+    const { pokemonList, getPokemons, isLoading } = usePokemonList()
+    // const renderItem = useMemo(() => PokemonCard, [pokemonList])
 
     return (
         <SafeAreaView>
@@ -20,27 +22,27 @@ export const PokedexScreen = () => {
                     opacity: 0.15
                 }}
             />
-            <Text style={{
-                fontSize: 35,
-                fontWeight: 'bold',
-                marginLeft: 20,
-                marginTop: 40
-            }}>Pokedex</Text>
 
-            <FlatList
-                data={pokemonList}
-                keyExtractor={pokemon => pokemon.id}
-                renderItem={({ item }) => (
-                    <>
-                        <Image source={{ uri: item.picture }} style={{ width: 100, height: 80 }} />
-                        <Text>{item.name}</Text>
-                    </>
-                )}
-                showsVerticalScrollIndicator={false}
-                onEndReached={getPokemons}
-                onEndReachedThreshold={0.4}
-                ListFooterComponent={<ActivityIndicator />}
-            />
+
+            <View style={{ paddingHorizontal: 20 }}>
+                <FlatList
+                    data={pokemonList}
+                    keyExtractor={pokemon => pokemon.id}
+                    renderItem={({ item }) => <PokemonCard item={item} />}
+                    showsVerticalScrollIndicator={false}
+                    onEndReached={getPokemons}
+                    onEndReachedThreshold={0.4}
+                    ListHeaderComponent={<Text style={{
+                        fontSize: 35,
+                        fontWeight: 'bold',
+                        marginTop: 40,
+                        marginBottom: 10
+                    }}>Pokedex</Text>}
+                    ListFooterComponent={<ActivityIndicator />}
+                    numColumns={2}
+                    columnWrapperStyle={{ justifyContent: 'space-around' }}
+                />
+            </View>
         </SafeAreaView>
     )
 }

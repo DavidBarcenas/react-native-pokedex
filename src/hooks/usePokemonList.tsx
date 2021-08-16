@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { getAll, pokeAPI, pokemonSprite } from '../api/pokeapi';
 import { PokemonList, PokemonListItem, Result } from '../models/pokemonList';
 
-export const usePokemoList = () => {
+export const usePokemonList = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [pokemonList, setPokemonList] = useState<PokemonListItem[]>([])
     const url = useRef(`${getAll}?limit=20`)
