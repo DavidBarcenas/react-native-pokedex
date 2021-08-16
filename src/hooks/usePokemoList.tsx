@@ -32,5 +32,5 @@ export const usePokemoList = () => {
         getPokemons()
     }, [])
 
-    return [pokemonList, isLoading]
+    return { pokemonList, isLoading, getPokemons }
 }
