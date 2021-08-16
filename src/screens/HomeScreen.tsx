@@ -1,10 +1,14 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Image, Text } from 'react-native'
 
 export const HomeScreen = () => {
     return (
-        <View>
-
-        </View>
+        <>
+            <Text>Hola mundo</Text>
+            <Image
+                source={require('../assets/pokebola.png')}
+                style={{ width: 150, height: 150 }}
+            />
+        </>
     )
 }
