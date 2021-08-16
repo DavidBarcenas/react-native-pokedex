@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { usePokemoList } from '../hooks/usePokemoList'
 
 export const PokedexScreen = () => {
-    usePokemoList()
+    const [pokemonList, isLoading] = usePokemoList()
 
     return (
         <SafeAreaView>

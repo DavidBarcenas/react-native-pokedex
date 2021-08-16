@@ -1,25 +1,36 @@
 import { useEffect, useRef, useState } from "react"
-import { pokeAPI } from '../api/pokeapi';
+import { getAll, pokeAPI, pokemonSprite } from '../api/pokeapi';
 import { PokemonList, PokemonListItem, Result } from '../models/pokemonList';
 
 export const usePokemoList = () => {
-    const [pokemonList, setpokemonList] = useState<PokemonListItem[]>([])
-    const url = useRef('https://pokeapi.co/api/v2/pokemon?limit=20')
+    const [isLoading, setIsLoading] = useState(true)
+    const [pokemonList, setPokemonList] = useState<PokemonListItem[]>([])
+    const url = useRef(`${getAll}?limit=20`)
 
-    const mapPokemonListItem = (list: Result[]) => {
-        list.map(pokemon => {
-            console.log(pokemon.name)
+    const buildListItem = (list: Result[]) => {
+        setIsLoading(true)
+
+        const newPokemonList: PokemonListItem[] = list.map(({ name, url }) => {
+            const urlSplit = url.split('/')
+            const id = urlSplit[urlSplit.length - 2]
+            const picture = `${pokemonSprite}/${id}.png`
+
+            return { id, picture, name }
         })
+
+        setPokemonList([...pokemonList, ...newPokemonList])
+        setIsLoading(false)
     }
 
     const getPokemons = async () => {
         const resp = await pokeAPI.get<PokemonList>(url.current)
         url.current = resp.data.next
-        mapPokemonListItem(resp.data.results)
+        buildListItem(resp.data.results)
     }
 
     useEffect(() => {
         getPokemons()
     }, [])
 
+    return [pokemonList, isLoading]
 }
