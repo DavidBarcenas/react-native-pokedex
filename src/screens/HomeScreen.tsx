@@ -1,14 +1,29 @@
 import React from 'react'
 import { Image, Text } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { usePokemoList } from '../hooks/usePokemoList'
 
 export const HomeScreen = () => {
+    usePokemoList()
     return (
-        <>
-            <Text>Hola mundo</Text>
+        <SafeAreaView>
             <Image
-                source={require('../assets/pokebola.png')}
-                style={{ width: 150, height: 150 }}
+                source={require('../assets/pokeball.png')}
+                style={{
+                    width: 300,
+                    height: 300,
+                    position: 'absolute',
+                    top: -100,
+                    right: -100,
+                    opacity: 0.15
+                }}
             />
-        </>
+            <Text style={{
+                fontSize: 35,
+                fontWeight: 'bold',
+                marginLeft: 20,
+                marginTop: 40
+            }}>Pokedex</Text>
+        </SafeAreaView>
     )
 }
