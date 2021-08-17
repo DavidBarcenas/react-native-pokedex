@@ -24,7 +24,7 @@ export const PokedexScreen = () => {
             />
 
 
-            <View style={{ paddingHorizontal: 20 }}>
+            <View>
                 <FlatList
                     data={pokemonList}
                     keyExtractor={pokemon => pokemon.id}
@@ -36,11 +36,12 @@ export const PokedexScreen = () => {
                         fontSize: 35,
                         fontWeight: 'bold',
                         marginTop: 40,
-                        marginBottom: 10
+                        marginBottom: 10,
+                        marginLeft: 15
                     }}>Pokedex</Text>}
                     ListFooterComponent={<ActivityIndicator />}
                     numColumns={2}
-                    columnWrapperStyle={{ justifyContent: 'space-around' }}
+                    columnWrapperStyle={{ justifyContent: 'space-evenly' }}
                 />
             </View>
         </SafeAreaView>

@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Dimensions, TouchableOpacity } from 'react-native'
 import { Image, Text, View } from 'react-native'
 import { PokemonListItem } from '../models/pokemonList'
+import { getImageColors } from '../utils/getColors'
 
 interface PokemonCardProps {
     item: PokemonListItem
@@ -10,7 +11,17 @@ interface PokemonCardProps {
 const width = Dimensions.get('window').width
 
 export const PokemonCard = ({ item }: PokemonCardProps) => {
+    const [background, setBackground] = useState('#fff')
     const { picture, name, id } = item
+
+    const getPokemonColors = async () => {
+        const [primary = '#fff', secondary = '#ccc'] = await getImageColors(picture)
+        setBackground(primary)
+    }
+
+    useEffect(() => {
+        getPokemonColors()
+    }, [])
 
     return (
         <TouchableOpacity
@@ -18,17 +29,23 @@ export const PokemonCard = ({ item }: PokemonCardProps) => {
             onPress={() => { }}
         >
             <View style={{
-                width: width * 0.42,
+                width: (width * 0.5) - 20,
                 borderRadius: 10,
                 height: 120,
                 position: 'relative',
-                backgroundColor: 'tomato',
+                backgroundColor: background,
                 paddingLeft: 10,
                 paddingTop: 15,
-                marginBottom: 20
+                marginBottom: 15,
             }}>
-                <Text style={{ fontWeight: 'bold' }}>{name}</Text>
-                <Text style={{ fontWeight: 'bold' }}>#{id}</Text>
+                <Text style={{
+                    fontWeight: 'bold',
+                    color: 'white',
+                    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+                    textShadowOffset: { width: 0.5, height: 0.5 },
+                    textShadowRadius: 10,
+                }}>{name}</Text>
+                <Text style={{ fontWeight: 'bold', color: 'white' }}>#{id}</Text>
                 <View style={{
                     position: 'absolute',
                     top: 0,
@@ -56,7 +73,7 @@ export const PokemonCard = ({ item }: PokemonCardProps) => {
                         position: 'absolute',
                         bottom: -15,
                         right: -10,
-                        zIndex: 5
+                        zIndex: 10
                     }}
                 />
             </View>
