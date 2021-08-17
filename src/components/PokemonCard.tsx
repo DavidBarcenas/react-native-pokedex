@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { CompositeScreenProps, useNavigation } from '@react-navigation/native'
 import { Dimensions, TouchableOpacity } from 'react-native'
 import { Image, Text, View } from 'react-native'
 import { PokemonListItem } from '../models/pokemonList'
 import { getImageColors } from '../utils/getColors'
+import { StackScreenProps } from '@react-navigation/stack'
+import { RootStackParams } from '../navigation/StackNavigator'
 
 interface PokemonCardProps {
-    item: PokemonListItem
+    item: PokemonListItem,
 }
 
 const width = Dimensions.get('window').width
@@ -14,6 +17,7 @@ const PokemonItem = ({ item }: PokemonCardProps) => {
     const [background, setBackground] = useState('#fff')
     const { picture, name, id } = item
     const isMounted = useRef(true)
+    const navigation = useNavigation()
 
     const getPokemonColors = async () => {
         const [primary = '#fff', secondary = '#ccc'] = await getImageColors(picture)
@@ -21,10 +25,7 @@ const PokemonItem = ({ item }: PokemonCardProps) => {
     }
 
     useEffect(() => {
-        if (!isMounted.current) {
-            return;
-        }
-
+        if (!isMounted.current) { return; }
         getPokemonColors()
 
         return () => {
@@ -35,7 +36,7 @@ const PokemonItem = ({ item }: PokemonCardProps) => {
     return (
         <TouchableOpacity
             activeOpacity={0.9}
-            onPress={() => { }}
+            onPress={() => navigation.navigate('Pokemon', { pokemonItem: item, color: background })}
         >
             <View style={{
                 width: (width * 0.5) - 20,
