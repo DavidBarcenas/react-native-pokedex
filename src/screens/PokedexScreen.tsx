@@ -1,13 +1,12 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { ActivityIndicator, Image, Text, View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { PokemonCard } from '../components/PokemonCard';
 import { usePokemonList } from '../hooks/usePokemonList';
+import { PokemonCard } from '../components/PokemonCard';
 
 export const PokedexScreen = () => {
     const { pokemonList, getPokemons, isLoading } = usePokemonList()
-    // const renderItem = useMemo(() => PokemonCard, [pokemonList])
 
     return (
         <SafeAreaView>
@@ -42,6 +41,7 @@ export const PokedexScreen = () => {
                     ListFooterComponent={<ActivityIndicator />}
                     numColumns={2}
                     columnWrapperStyle={{ justifyContent: 'space-evenly' }}
+                    removeClippedSubviews
                 />
             </View>
         </SafeAreaView>

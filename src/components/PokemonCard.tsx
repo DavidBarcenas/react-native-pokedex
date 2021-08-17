@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Dimensions, TouchableOpacity } from 'react-native'
 import { Image, Text, View } from 'react-native'
 import { PokemonListItem } from '../models/pokemonList'
@@ -10,9 +10,10 @@ interface PokemonCardProps {
 
 const width = Dimensions.get('window').width
 
-export const PokemonCard = ({ item }: PokemonCardProps) => {
+const PokemonItem = ({ item }: PokemonCardProps) => {
     const [background, setBackground] = useState('#fff')
     const { picture, name, id } = item
+    const isMounted = useRef(true)
 
     const getPokemonColors = async () => {
         const [primary = '#fff', secondary = '#ccc'] = await getImageColors(picture)
@@ -20,7 +21,15 @@ export const PokemonCard = ({ item }: PokemonCardProps) => {
     }
 
     useEffect(() => {
+        if (!isMounted.current) {
+            return;
+        }
+
         getPokemonColors()
+
+        return () => {
+            isMounted.current = false
+        }
     }, [])
 
     return (
@@ -80,3 +89,5 @@ export const PokemonCard = ({ item }: PokemonCardProps) => {
         </TouchableOpacity>
     )
 }
+
+export const PokemonCard = React.memo(PokemonItem)
