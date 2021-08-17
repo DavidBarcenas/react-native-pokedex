@@ -4,11 +4,13 @@ import { HomeScreen } from '../screens/HomeScreen';
 import { PokedexScreen } from '../screens/PokedexScreen';
 import { PokemonScreen } from '../screens/PokemonScreen';
 import { PokemonListItem } from '../models/pokemonList';
+import { SearchScreen } from '../screens/SearchScreen';
 
 export type RootStackParams = {
     Home: undefined;
     Pokedex: undefined;
     Pokemon: { pokemonItem: PokemonListItem, color: string }
+    Search: undefined
 }
 
 declare global {
@@ -32,6 +34,7 @@ export const StackNavigator = () => {
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Pokedex" component={PokedexScreen} />
             <Stack.Screen name="Pokemon" component={PokemonScreen} />
+            <Stack.Screen name="Search" component={SearchScreen} />
         </Stack.Navigator>
     );
 }

@@ -14,6 +14,9 @@ export const HomeScreen = ({ navigation }: HomeProps) => {
             <Pressable onPress={() => navigation.navigate('Pokedex')}>
                 <Text>Pokedex</Text>
             </Pressable>
+            <Pressable onPress={() => navigation.navigate('Search')}>
+                <Text>Search</Text>
+            </Pressable>
         </SafeAreaView>
     )
 }
