@@ -3,12 +3,16 @@ import { Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { useDebounce } from '../hooks/useDebounce';
 
-export const SearchInput = () => {
+interface Props {
+    onDebounce: (value: string) => void;
+}
+
+export const SearchInput = ({ onDebounce }: Props) => {
     const [searchValue, setSearchValue] = useState('')
     const debouncedValue = useDebounce(searchValue)
 
     useEffect(() => {
-        console.log(debouncedValue)
+        onDebounce(debouncedValue)
     }, [debouncedValue])
 
     return (
