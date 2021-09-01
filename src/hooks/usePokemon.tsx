@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getAll, pokeAPI } from "../api/pokeapi"
-import { Pokemon } from "../models/pokemon"
+import { Pokemon } from "../types/pokemon"
 
 export const usePokemon = (id: string) => {
     const [isLoading, setIsLoading] = useState(true)

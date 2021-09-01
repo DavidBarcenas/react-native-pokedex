@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from '../screens/HomeScreen';
 import { PokedexScreen } from '../screens/PokedexScreen';
 import { PokemonScreen } from '../screens/PokemonScreen';
-import { PokemonListItem } from '../models/pokemonList';
+import { PokemonListItem } from '../types/pokemonList';
 import { SearchScreen } from '../screens/SearchScreen';
 
 export type RootStackParams = {

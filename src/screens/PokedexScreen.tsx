@@ -2,12 +2,12 @@ import React from 'react'
 import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { usePokemonList } from '../hooks/usePokemonList';
+import { usePokemons } from '../hooks/usePokemons';
 import { PokemonCard } from '../components/PokemonCard';
 import { Pokeball } from '../components/Pokeball';
 
 export const PokedexScreen = () => {
-    const { pokemonList, getPokemons, isLoading } = usePokemonList()
+    const { pokemonList, getPokemons, isLoading } = usePokemons()
 
     return (
         <SafeAreaView>
