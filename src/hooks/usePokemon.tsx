@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAll, pokeAPI } from "../api/pokeapi"
+import { urlPokemons, pokeAPI } from "../api/pokeapi"
 import { Pokemon } from "../types/pokemon"
 
 export const usePokemon = (id: string) => {
@@ -8,7 +8,7 @@ export const usePokemon = (id: string) => {
 
     const getPokemonInfo = async () => {
         setIsLoading(true)
-        const resp = await pokeAPI.get<Pokemon>(`${getAll}/${id}`)
+        const resp = await pokeAPI.get<Pokemon>(`${urlPokemons}/${id}`)
         setPokemon(resp.data)
         setIsLoading(false)
     }

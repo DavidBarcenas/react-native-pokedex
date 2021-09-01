@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from "react"
-import { getAll, pokeAPI, pokemonSprite } from '../api/pokeapi';
+import { urlPokemons, pokeAPI, pokemonSprite } from '../api/pokeapi';
 import { PokemonList, PokemonListItem, Result } from '../types/pokemonList';
+import { RequestStatus } from "../types/requestStatus";
 
 export const usePokemons = () => {
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState<RequestStatus>('idle')
     const [pokemons, setPokemons] = useState<PokemonListItem[]>([])
-    const urlAllPokemons = useRef(`${getAll}?limit=20`)
+    const urlAllPokemons = useRef(`${urlPokemons}?limit=20`)
 
     const buildListItem = (list: Result[]) => {
-        setIsLoading(true)
+        setIsLoading('loading')
 
         const appendPokemons: PokemonListItem[] = list.map(({ name, url }) => {
             const urlSplit = url.split('/')
@@ -19,13 +20,18 @@ export const usePokemons = () => {
         })
 
         setPokemons([...pokemons, ...appendPokemons])
-        setIsLoading(false)
+        setIsLoading('success')
     }
 
     const fetchPokemons = async () => {
-        const response = await pokeAPI.get<PokemonList>(urlAllPokemons.current)
-        urlAllPokemons.current = response.data.next
-        buildListItem(response.data.results)
+        try {
+            const response = await pokeAPI.get<PokemonList>(urlAllPokemons.current)
+            urlAllPokemons.current = response.data.next
+            buildListItem(response.data.results)
+        } catch (error) {
+            setPokemons([])
+            setIsLoading('error')
+        }
     }
 
     useEffect(() => {

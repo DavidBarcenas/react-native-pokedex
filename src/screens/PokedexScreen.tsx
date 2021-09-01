@@ -7,17 +7,17 @@ import { PokemonCard } from '../components/PokemonCard';
 import { Pokeball } from '../components/Pokeball';
 
 export const PokedexScreen = () => {
-    const { pokemonList, getPokemons, isLoading } = usePokemons()
+    const { pokemons, fetchPokemons, isLoading } = usePokemons()
 
     return (
         <SafeAreaView>
             <View>
                 <FlatList
-                    data={pokemonList}
+                    data={pokemons}
                     keyExtractor={pokemon => pokemon.id}
                     renderItem={({ item }) => <PokemonCard item={item} />}
                     showsVerticalScrollIndicator={false}
-                    onEndReached={getPokemons}
+                    onEndReached={fetchPokemons}
                     onEndReachedThreshold={0.4}
                     ListHeaderComponent={
                         <View style={styles.titleContainer}>
