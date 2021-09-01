@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from "react"
 import { urlPokemons, pokeAPI, pokemonSprite } from '../api/pokeapi';
-import { PokemonList, PokemonListItem, Result } from '../types/pokemonList';
+import { Result, PokemonCustom, PokemonsResponse } from '../types/pokemonList';
 import { RequestStatus } from "../types/requestStatus";
 
 export const usePokemons = () => {
-    const [isLoading, setIsLoading] = useState<RequestStatus>('idle')
-    const [pokemons, setPokemons] = useState<PokemonListItem[]>([])
+    const [status, setStatus] = useState<RequestStatus>('idle')
+    const [pokemons, setPokemons] = useState<PokemonCustom[]>([])
     const urlAllPokemons = useRef(`${urlPokemons}?limit=20`)
 
-    const buildListItem = (list: Result[]) => {
-        setIsLoading('loading')
+    const buildPokemonCustom = (list: Result[]) => {
+        setStatus('loading')
 
-        const appendPokemons: PokemonListItem[] = list.map(({ name, url }) => {
+        const appendPokemons: PokemonCustom[] = list.map(({ name, url }) => {
             const urlSplit = url.split('/')
             const id = urlSplit[urlSplit.length - 2]
             const picture = `${pokemonSprite}/${id}.png`
@@ -20,23 +20,28 @@ export const usePokemons = () => {
         })
 
         setPokemons([...pokemons, ...appendPokemons])
-        setIsLoading('success')
+        setStatus('success')
     }
 
     const fetchPokemons = async () => {
         try {
-            const response = await pokeAPI.get<PokemonList>(urlAllPokemons.current)
+            const response = await pokeAPI.get<PokemonsResponse>(urlAllPokemons.current)
             urlAllPokemons.current = response.data.next
-            buildListItem(response.data.results)
+            buildPokemonCustom(response.data.results)
         } catch (error) {
             setPokemons([])
-            setIsLoading('error')
+            setStatus('error')
         }
     }
 
     useEffect(() => {
-        fetchPokemons()
+        let isMounted = true;
+        if (isMounted) { fetchPokemons() }
+
+        return () => {
+            isMounted = false
+        }
     }, [])
 
-    return { pokemons, isLoading, fetchPokemons }
+    return { pokemons, status, fetchPokemons }
 }

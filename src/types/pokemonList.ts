@@ -1,4 +1,4 @@
-export type PokemonList = {
+export type PokemonsResponse = {
     count: number
     next: string
     previous: null
@@ -10,7 +10,7 @@ export type Result =  {
     url: string
 }
 
-export type PokemonListItem = {
+export type PokemonCustom = {
     id: string
     name: string
     picture: string
