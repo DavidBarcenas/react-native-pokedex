@@ -1,8 +1,10 @@
 import React from 'react'
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '../navigation/StackNavigator';
-import { Image, Text, View } from 'react-native';
+import { Image, Text, View, StyleSheet } from 'react-native';
 import { usePokemon } from '../hooks/usePokemon';
+import LeftArrowIcon from '../assets/left-arrow.svg'
+import FavoriteIcon from '../assets/favorite.svg'
 
 interface Props extends StackScreenProps<RootStackParams, 'Pokemon'> { }
 
@@ -12,12 +14,12 @@ export const PokemonScreen = ({ route }: Props) => {
 
     return (
         <View>
-            <View style={{
-                backgroundColor: color,
-                width: '100%',
-                position: 'relative',
-                height: 350
-            }}>
+            <View style={{ ...styles.header, backgroundColor: color, }}>
+                <View style={styles.square} />
+                <View style={styles.icons}>
+                    <LeftArrowIcon width={30} />
+                    <FavoriteIcon width={30} />
+                </View>
                 <Image
                     source={{ uri: pokemonItem.picture }}
                     style={{
@@ -36,6 +38,32 @@ export const PokemonScreen = ({ route }: Props) => {
             <Text>
                 {pokemon?.height}
             </Text>
-        </View>
+        </View >
     )
 }
+
+const styles = StyleSheet.create({
+    header: {
+        width: '100%',
+        position: 'relative',
+        height: 350
+    },
+    square: {
+        position: 'absolute',
+        top: -30,
+        left: -50,
+        backgroundColor: 'rgba(255,255,255,.2)',
+        width: 150,
+        height: 150,
+        transform: [{ rotate: '60deg' }]
+    },
+    icons: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        minHeight: 50,
+        paddingHorizontal: 20,
+        marginVertical: 20,
+        width: '100%',
+    }
+})
