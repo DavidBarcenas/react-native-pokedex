@@ -11,7 +11,7 @@ type Props = {
 }
 const DEFAULT_COLOR = '#f5f5f5'
 
-const Pokemon = ({ item }: Props) => {
+const PokemonCard = ({ item }: Props) => {
     const [background, setBackground] = useState(DEFAULT_COLOR)
     const { picture, name, id } = item
     const { navigate } = useNavigation()
@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export const PokemonCard = React.memo(Pokemon)
+export const Pokemon = React.memo(PokemonCard)
