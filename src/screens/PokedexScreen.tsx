@@ -2,6 +2,7 @@ import React from 'react'
 import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
+
 import { usePokemons } from '../hooks/usePokemons';
 import { PokemonCard } from '../components/PokemonCard';
 import { Pokeball } from '../components/Pokeball';
@@ -9,9 +10,9 @@ import { Pokeball } from '../components/Pokeball';
 const RED_COLOR = '#fc6c6d'
 
 export const PokedexScreen = () => {
-    const { pokemons, fetchPokemons, status } = usePokemons()
+    const { pokemons, getPokemons, status } = usePokemons()
 
-    if (status === 'loading') {
+    if (status === 'loading' && pokemons.length === 0) {
         return (
             <View style={{ flex: 1, justifyContent: 'center' }}>
                 <ActivityIndicator color={RED_COLOR} size={30} />
@@ -36,7 +37,7 @@ export const PokedexScreen = () => {
                     keyExtractor={pokemon => pokemon.id}
                     renderItem={({ item }) => <PokemonCard item={item} />}
                     showsVerticalScrollIndicator={false}
-                    onEndReached={fetchPokemons}
+                    onEndReached={getPokemons}
                     onEndReachedThreshold={0.4}
                     ListHeaderComponent={
                         <View style={styles.titleContainer}>
@@ -44,7 +45,7 @@ export const PokedexScreen = () => {
                             <Text style={styles.title}>Pokédex</Text>
                         </View>
                     }
-                    ListFooterComponent={<ActivityIndicator />}
+                    ListFooterComponent={<ActivityIndicator color={RED_COLOR} size={30} />}
                     columnWrapperStyle={{ justifyContent: 'space-evenly' }}
                     removeClippedSubviews
                     numColumns={2}

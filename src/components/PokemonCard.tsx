@@ -1,94 +1,67 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { CompositeScreenProps, useNavigation } from '@react-navigation/native'
-import { Dimensions, TouchableOpacity } from 'react-native'
-import { Image, Text, View } from 'react-native'
-import { PokemonListItem } from '../types/pokemonList'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
+import { TouchableOpacity, StyleSheet, Image } from 'react-native';
+
+import { PokemonCustom } from '../types/pokemonList'
 import { getImageColors } from '../utils/getColors'
-import { StackScreenProps } from '@react-navigation/stack'
-import { RootStackParams } from '../navigation/StackNavigator'
+import { Card } from './Card';
 
-interface PokemonCardProps {
-    item: PokemonListItem,
+type Props = {
+    item: PokemonCustom,
 }
+const DEFAULT_COLOR = '#f5f5f5'
 
-const width = Dimensions.get('window').width
-
-const PokemonItem = ({ item }: PokemonCardProps) => {
-    const [background, setBackground] = useState('#fff')
+const Pokemon = ({ item }: Props) => {
+    const [background, setBackground] = useState(DEFAULT_COLOR)
     const { picture, name, id } = item
+    const { navigate } = useNavigation()
     const isMounted = useRef(true)
-    const navigation = useNavigation()
 
-    const getPokemonColors = async () => {
-        const [primary = '#fff', secondary = '#ccc'] = await getImageColors(picture)
-        setBackground(primary)
-    }
+    const getPictureColors = useCallback(
+        async () => {
+            const [primary = DEFAULT_COLOR] = await getImageColors(picture)
+            setBackground(primary)
+        },
+        [picture],
+    )
 
     useEffect(() => {
         if (!isMounted.current) { return; }
-        getPokemonColors()
+        getPictureColors()
 
         return () => {
             isMounted.current = false
         }
     }, [])
 
+    if (background === DEFAULT_COLOR) {
+        return <Card id={id} name={name} pokeballColor='gray' />
+    }
+
     return (
         <TouchableOpacity
             activeOpacity={0.9}
-            onPress={() => navigation.navigate('Pokemon', { pokemonItem: item, color: background })}
+            onPress={() => navigate('Pokemon', {
+                pokemonItem: item,
+                color: background
+            })}
         >
-            <View style={{
-                width: (width * 0.5) - 20,
-                borderRadius: 10,
-                height: 120,
-                position: 'relative',
-                backgroundColor: background,
-                paddingLeft: 10,
-                paddingTop: 15,
-                marginBottom: 15,
-            }}>
-                <Text style={{
-                    fontWeight: 'bold',
-                    color: 'white',
-                    textShadowColor: 'rgba(0, 0, 0, 0.5)',
-                    textShadowOffset: { width: 0.5, height: 0.5 },
-                    textShadowRadius: 10,
-                }}>{name}</Text>
-                <Text style={{ fontWeight: 'bold', color: 'white' }}>#{id}</Text>
-                <View style={{
-                    position: 'absolute',
-                    top: 0,
-                    right: 0,
-                    overflow: 'hidden',
-                    width: 100,
-                    height: 100,
-                }}>
-                    <Image
-                        source={require('../assets/pokeball-white.png')}
-                        style={{
-                            width: 100,
-                            height: 100,
-                            opacity: 0.4,
-                            top: -10,
-                            right: -20
-                        }}
-                    />
-                </View>
-                <Image
-                    source={{ uri: picture }}
-                    style={{
-                        width: 120,
-                        height: 120,
-                        position: 'absolute',
-                        bottom: -15,
-                        right: -10,
-                        zIndex: 10
-                    }}
-                />
-            </View>
+            <Card id={id} name={name} color='#fff' backgroundColor={background}>
+                <Image source={{ uri: picture }} style={styles.img} />
+            </Card>
         </TouchableOpacity>
     )
 }
 
-export const PokemonCard = React.memo(PokemonItem)
+const styles = StyleSheet.create({
+    img: {
+        width: 120,
+        height: 120,
+        position: 'absolute',
+        bottom: -15,
+        right: -10,
+        zIndex: 1
+    }
+})
+
+export const PokemonCard = React.memo(Pokemon)

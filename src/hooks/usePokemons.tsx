@@ -23,7 +23,7 @@ export const usePokemons = () => {
         setStatus('success')
     }
 
-    const fetchPokemons = async () => {
+    const getPokemons = async () => {
         try {
             const response = await pokeAPI.get<PokemonsResponse>(urlAllPokemons.current)
             urlAllPokemons.current = response.data.next
@@ -36,12 +36,12 @@ export const usePokemons = () => {
 
     useEffect(() => {
         let isMounted = true;
-        if (isMounted) { fetchPokemons() }
+        if (isMounted) { getPokemons() }
 
         return () => {
             isMounted = false
         }
     }, [])
 
-    return { pokemons, status, fetchPokemons }
+    return { pokemons, status, getPokemons }
 }
