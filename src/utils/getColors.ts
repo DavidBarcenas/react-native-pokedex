@@ -8,7 +8,7 @@ export const getImageColors = async (uri: string) => {
     let primary, secondary;
 
     if (colors.platform === 'android') {
-        primary = colors.dominant
+        primary = colors.muted
         secondary = colors.darkMuted
     } else {
         primary = colors.primary

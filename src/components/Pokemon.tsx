@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { TouchableOpacity, StyleSheet, Image, Animated } from 'react-native';
 
 import { PokemonCustom } from '../types/pokemonList'
 import { getImageColors } from '../utils/getColors'
