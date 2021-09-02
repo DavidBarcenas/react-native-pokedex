@@ -4,7 +4,7 @@ import { FlatList } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { usePokemons } from '../hooks/usePokemons';
-import { Pokemon } from '../components/Pokemon';
+import { PokedexItem } from '../components/PokedexItem';
 import { Pokeball } from '../components/Pokeball';
 
 const RED_COLOR = '#fc6c6d'
@@ -35,7 +35,7 @@ export const PokedexScreen = () => {
                 <FlatList
                     data={pokemons}
                     keyExtractor={pokemon => pokemon.id}
-                    renderItem={({ item }) => <Pokemon item={item} />}
+                    renderItem={({ item }) => <PokedexItem item={item} />}
                     showsVerticalScrollIndicator={false}
                     onEndReached={getPokemons}
                     onEndReachedThreshold={0.4}

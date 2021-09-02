@@ -22,7 +22,7 @@ const PokemonCard = ({ item }: Props) => {
             const [primary = DEFAULT_COLOR] = await getImageColors(picture)
             setBackground(primary)
         },
-        [picture],
+        [],
     )
 
     useEffect(() => {
@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export const Pokemon = React.memo(PokemonCard)
+export const PokedexItem = React.memo(PokemonCard)
