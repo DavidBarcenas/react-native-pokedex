@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+import { Type } from '../../types/pokemon';
+import { Pokeball } from '../Pokeball';
 
 import DotsIcon from '../../assets/dots.svg'
 import LeftArrowIcon from '../../assets/left-arrow.svg'
 import FavoriteIcon from '../../assets/favorite.svg'
-import { Type } from '../../types/pokemon';
-import { Pokeball } from '../Pokeball';
 
 type Props = {
   backgroundColor: string,
@@ -18,6 +19,13 @@ type Props = {
 
 export const Header = ({ backgroundColor, picture, name, id, types }: Props) => {
   const { goBack } = useNavigation()
+
+  const addZeros = useCallback(
+    (id: string) => {
+      return id.padStart(3, '0')
+    },
+    [],
+  )
 
   return (
     <View style={{ ...styles.container, backgroundColor }}>
@@ -40,7 +48,7 @@ export const Header = ({ backgroundColor, picture, name, id, types }: Props) => 
 
       <View style={styles.wrapText}>
         <Text style={styles.title}>{name}</Text>
-        <Text style={[styles.badge, styles.id]}>#{id}</Text>
+        <Text style={[styles.badge, styles.id]}>#{addZeros(id)}</Text>
       </View>
 
       <View style={styles.wrapTypes}>
@@ -52,6 +60,8 @@ export const Header = ({ backgroundColor, picture, name, id, types }: Props) => 
           </Text>
         ))}
       </View>
+
+      <View style={styles.tabBg} />
     </View>
   )
 }
@@ -59,7 +69,7 @@ export const Header = ({ backgroundColor, picture, name, id, types }: Props) => 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 380,
+    height: 450,
     position: 'relative',
   },
   dotsIcon: {
@@ -92,8 +102,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     position: 'absolute',
-    bottom: -60,
-    width: '100%'
+    bottom: -30,
+    width: '100%',
+    zIndex: 1
   },
   picture: {
     width: 280,
@@ -130,5 +141,14 @@ const styles = StyleSheet.create({
   id: {
     fontSize: 20,
     fontWeight: 'bold'
+  },
+  tabBg: {
+    position: 'absolute',
+    width: '100%',
+    height: 30,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    backgroundColor: '#fff',
+    bottom: -5,
   }
 })

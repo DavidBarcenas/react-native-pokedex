@@ -22,7 +22,7 @@ const PokemonCard = ({ item }: Props) => {
             const [primary = DEFAULT_COLOR] = await getImageColors(picture)
             setBackground(primary)
         },
-        [],
+        [picture],
     )
 
     useEffect(() => {
