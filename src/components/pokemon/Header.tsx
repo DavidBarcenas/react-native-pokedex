@@ -69,7 +69,7 @@ export const Header = ({ backgroundColor, picture, name, id, types }: Props) => 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 450,
+    height: 430,
     position: 'relative',
   },
   dotsIcon: {
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     position: 'absolute',
-    bottom: -30,
+    bottom: -20,
     width: '100%',
     zIndex: 1
   },
