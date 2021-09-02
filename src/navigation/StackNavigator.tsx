@@ -3,13 +3,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from '../screens/HomeScreen';
 import { PokedexScreen } from '../screens/PokedexScreen';
 import { PokemonScreen } from '../screens/PokemonScreen';
-import { PokemonListItem } from '../types/pokemonList';
 import { SearchScreen } from '../screens/SearchScreen';
+import { PokemonCustom } from '../types/pokemonList';
 
 export type RootStackParams = {
     Home: undefined;
     Pokedex: undefined;
-    Pokemon: { pokemonItem: PokemonListItem, color: string }
+    Pokemon: { pokemonItem: PokemonCustom, color: string }
     Search: undefined
 }
 
