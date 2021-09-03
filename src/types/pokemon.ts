@@ -1,3 +1,12 @@
+import { Evolution } from "./evolution"
+import { Species } from "./species"
+
+export type PokemonState = {
+    about: Pokemon
+    evolution: Evolution,
+    species: Species
+}
+
 export type Pokemon = {
     id: number
     name: string
@@ -7,12 +16,12 @@ export type Pokemon = {
     order: number
     weight: number
     abilities: Ability[]
-    forms: Species[]
+    forms: SpeciesCustom[]
     game_indices: GameIndex[]
     held_items: HeldItem[]
     location_area_encounters: string
     moves: Move[]
-    species: Species
+    species: SpeciesCustom
     sprites: Sprites
     stats: Stat[]
     types: Type[]
@@ -21,38 +30,38 @@ export type Pokemon = {
 export type Ability = {
     is_hidden: boolean
     slot: number
-    ability: Species
+    ability: SpeciesCustom
 }
 
-export type Species = {
+export type SpeciesCustom = {
     name: string
     url: string
 }
 
 export type GameIndex = {
     game_index: number
-    version: Species
+    version: SpeciesCustom
 }
 
 export type HeldItem = {
-    item: Species
+    item: SpeciesCustom
     version_details: VersionDetail[]
 }
 
 export type VersionDetail = {
     rarity: number
-    version: Species
+    version: SpeciesCustom
 }
 
 export type Move = {
-    move: Species
+    move: SpeciesCustom
     version_group_details: VersionGroupDetail[]
 }
 
 export type VersionGroupDetail = {
     level_learned_at: number
-    version_group: Species
-    move_learn_method: Species
+    version_group: SpeciesCustom
+    move_learn_method: SpeciesCustom
 }
 
 export type Sprites = {
@@ -126,10 +135,10 @@ export type GenerationViii = {
 export type Stat = {
     base_stat: number
     effort: number
-    stat: Species
+    stat: SpeciesCustom
 }
 
 export type Type = {
     slot: number
-    type: Species
+    type: SpeciesCustom
 }

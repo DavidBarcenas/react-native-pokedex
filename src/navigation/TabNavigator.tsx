@@ -3,10 +3,10 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 
 import { AboutTab } from '../components/pokemon/AboutTab';
 import { SearchScreen } from '../screens/SearchScreen';
-import { Pokemon } from '../types/pokemon';
+import { PokemonState } from '../types/pokemon';
 
 type Props = {
-  pokemon: Pokemon | null
+  pokemon: PokemonState | null
 }
 
 const Tab = createMaterialTopTabNavigator();

@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react"
-import { urlPokemons, pokeAPI, pokemonSprite } from '../api/pokeapi';
+import { baseUrlPokeAPI, pokeAPI, pokemonSprite } from '../api/pokeapi';
 import { Result, PokemonCustom, PokemonsResponse } from '../types/pokemonList';
 import { RequestStatus } from "../types/requestStatus";
 
 export const usePokemons = () => {
     const [status, setStatus] = useState<RequestStatus>('idle')
     const [pokemons, setPokemons] = useState<PokemonCustom[]>([])
-    const urlAllPokemons = useRef(`${urlPokemons}?limit=20`)
+    const urlAllPokemons = useRef(`${baseUrlPokeAPI}/pokemon?limit=20`)
 
     const buildPokemonCustom = (list: Result[]) => {
         setStatus('loading')
