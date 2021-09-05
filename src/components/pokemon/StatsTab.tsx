@@ -9,7 +9,7 @@ export const StatsTab = ({ pokemon }: { pokemon: PokemonState | null }) => {
     <View style={styles.container}>
       {
         pokemon?.about.stats.map(s => (
-          <Stat name={s.stat.name} baseStat={s.base_stat} percetange={150} />
+          <Stat key={s.stat.name} name={s.stat.name} baseStat={s.base_stat} percetange={150} />
         ))
       }
       <Stat name='Total' baseStat={total} percetange={1000} />
@@ -31,7 +31,7 @@ const Stat = ({ name, baseStat, percetange }: { name: string, baseStat: number, 
   }
 
   return (
-    <View key={name} style={styles.stat}>
+    <View style={styles.stat}>
       <Text style={styles.title}>{statisticName(name)}:</Text>
       <View style={styles.progressWrap}>
         <View style={{

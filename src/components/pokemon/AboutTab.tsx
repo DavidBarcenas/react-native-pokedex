@@ -3,6 +3,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import { Pokemon, PokemonState } from '../../types/pokemon';
 
 export const AboutTab = ({ pokemon }: { pokemon: PokemonState | null }) => {
+  console.log('SE EJECUTAN LOS TABS')
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
