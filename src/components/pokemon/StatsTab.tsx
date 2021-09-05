@@ -36,7 +36,7 @@ const Stat = ({ name, baseStat, percetange }: { name: string, baseStat: number, 
       <View style={styles.progressWrap}>
         <View style={{
           ...styles.progress,
-          backgroundColor: (baseStat < 75) ? '#f44336' : '#8bc34a',
+          backgroundColor: (baseStat < 75) ? '#f44336' : '#4caf50',
           width: (baseStat * 100) / percetange + '%'
         }} />
       </View>

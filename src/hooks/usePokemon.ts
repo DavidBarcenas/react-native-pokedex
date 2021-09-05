@@ -15,8 +15,8 @@ export const usePokemon = (id: string) => {
         try {
             setStatus('loading')
             const about = pokeAPI.get<Pokemon>(`${baseUrlPokeAPI}/pokemon/${id}`)
-            const evolution = pokeAPI.get<Evolution>(`${baseUrlPokeAPI}/evolution-chain/${id}`)
             const species = pokeAPI.get<Species>(`${baseUrlPokeAPI}/pokemon-species/${id}`)
+            const evolution = pokeAPI.get((await species).data.evolution_chain.url)
     
             const data = await Promise.all([ about, evolution, species ])
             
