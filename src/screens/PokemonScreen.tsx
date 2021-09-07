@@ -1,17 +1,17 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParams } from '../navigation/StackNavigator';
-import { Image, Text, View, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, Text, Image } from 'react-native';
+
 import { usePokemon } from '../hooks/usePokemon';
-import { Header } from '../components/pokemon/Header';
+import { RootStackParams } from '../navigation/StackNavigator';
 import { TabNavigator } from '../navigation/TabNavigator';
-import { Store } from '../context/store';
+import { Header } from '../components/pokemon/Header';
+import { Spinner } from '../components/Spinner';
 
 type Props = StackScreenProps<RootStackParams, 'Pokemon'>
 
-const RED_COLOR = '#fc6c6d'
-
 export const PokemonScreen = ({ route }: Props) => {
+    console.log('re render')
     const { pokemonItem, color } = route.params
     const { pokemon, status } = usePokemon(pokemonItem.id)
 
@@ -25,14 +25,25 @@ export const PokemonScreen = ({ route }: Props) => {
                 types={pokemon?.about.types}
             />
             <View style={styles.tabsContainer}>
-                {status === 'loading' ?
-                    <ActivityIndicator color={RED_COLOR} size={30} /> :
-                    <TabNavigator pokemon={pokemon} />
-                }
+                {status === 'loading' && <Spinner />}
+                {status === 'error' && <NoDetailsFound />}
+                {status === 'success' && <TabNavigator />}
             </View>
         </>
     )
 }
+
+const NoDetailsFound = () => (
+    <View style={styles.notFound}>
+        <Text style={styles.textNotFound}>
+            No details found for this pokemon.
+        </Text>
+        <Image
+            style={styles.imgNotFound}
+            source={require('../assets/pokeball.png')}
+        />
+    </View>
+)
 
 const styles = StyleSheet.create({
     tabsContainer: {
@@ -40,5 +51,20 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 20,
         paddingTop: 10
+    },
+    notFound: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    textNotFound: {
+        fontSize: 22,
+        color: '#bdbdbd',
+        fontWeight: 'bold',
+        marginVertical: 20
+    },
+    imgNotFound: {
+        width: 150,
+        height: 150,
+        opacity: .2
     }
 })

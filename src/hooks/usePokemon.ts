@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react"
+
 import { baseUrlPokeAPI, pokeAPI } from "../api/pokeapi"
-import { RequestStatus } from "../types/requestStatus"
-import { Pokemon, PokemonState } from "../types/pokemon"
-import { Evolution } from "../types/evolution"
-import { Species } from "../types/species"
 import { Store } from "../context/store"
 
+import type { RequestStatus } from "../types/requestStatus"
+import type { Pokemon, PokemonState } from "../types/pokemon"
+import type { Species } from "../types/species"
 
 
 export const usePokemon = (id: string) => {

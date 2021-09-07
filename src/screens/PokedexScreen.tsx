@@ -20,8 +20,13 @@ export const PokedexScreen = () => {
     if (status === 'error' || (status === 'success' && pokemons.length === 0)) {
         return (
             <View style={styles.withoutResults}>
-                <Text style={styles.withoutResultText}>At this time there are no pokemons available.</Text>
-                <Image style={styles.withoutResultImg} source={require('../assets/pokeball-white.png')} />
+                <Text style={styles.withoutResultText}>
+                    At this time there are no pokemons available.
+                </Text>
+                <Image
+                    style={styles.withoutResultImg}
+                    source={require('../assets/pokeball-white.png')}
+                />
             </View>
         )
     }
