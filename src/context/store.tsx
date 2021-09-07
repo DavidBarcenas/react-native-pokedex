@@ -1,14 +1,6 @@
 import React, { createContext, useReducer } from "react";
-import { ActionProps, initialState, StateProps, stateReducer } from "./reducer";
-
-type ProviderProps = {
-  children: React.ReactNode
-}
-
-type StoreProps = {
-  state: StateProps
-  dispatch: React.Dispatch<ActionProps>
-}
+import { ProviderProps, StoreProps } from "../types/context";
+import { initialState, stateReducer } from "./reducer";
 
 export const Store = createContext({} as StoreProps)
 

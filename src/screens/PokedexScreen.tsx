@@ -6,8 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { usePokemons } from '../hooks/usePokemons';
 import { PokedexItem } from '../components/PokedexItem';
 import { Pokeball } from '../components/Pokeball';
-
-const RED_COLOR = '#fc6c6d'
+import { colors } from '../theme/colors';
 
 export const PokedexScreen = () => {
     const { pokemons, getPokemons, status } = usePokemons()
@@ -15,7 +14,7 @@ export const PokedexScreen = () => {
     if (status === 'loading' && pokemons.length === 0) {
         return (
             <View style={{ flex: 1, justifyContent: 'center' }}>
-                <ActivityIndicator color={RED_COLOR} size={30} />
+                <ActivityIndicator color={colors.red} size={30} />
             </View>
         )
     }
@@ -45,7 +44,7 @@ export const PokedexScreen = () => {
                             <Text style={styles.title}>Pokédex</Text>
                         </View>
                     }
-                    ListFooterComponent={<ActivityIndicator color={RED_COLOR} size={30} />}
+                    ListFooterComponent={<ActivityIndicator color={colors.red} size={30} />}
                     columnWrapperStyle={{ justifyContent: 'space-evenly' }}
                     removeClippedSubviews
                     numColumns={2}
@@ -58,7 +57,7 @@ export const PokedexScreen = () => {
 
 const styles = StyleSheet.create({
     titleContainer: {
-        backgroundColor: RED_COLOR,
+        backgroundColor: colors.red,
         height: 80,
         display: 'flex',
         justifyContent: 'center',
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: RED_COLOR,
+        backgroundColor: colors.red,
     },
     withoutResultText: {
         fontSize: 25,

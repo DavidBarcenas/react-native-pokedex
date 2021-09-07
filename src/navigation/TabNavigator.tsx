@@ -2,23 +2,12 @@ import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import { AboutTab } from '../components/pokemon/AboutTab';
-import { SearchScreen } from '../screens/SearchScreen';
-import { PokemonState } from '../types/pokemon';
 import { StatsTab } from '../components/pokemon/StatsTab';
 import { EvolutionTab } from '../components/pokemon/EvolutionTab';
 
-type Props = {
-  pokemon: PokemonState | null
-}
-
 const Tab = createMaterialTopTabNavigator();
 
-
-export const TabNavigator = ({ pokemon }: Props) => {
-  const AboutScreen = () => <AboutTab pokemon={pokemon} />
-  const StatsScreen = () => <StatsTab pokemon={pokemon} />
-  const EvolutionScreen = () => <EvolutionTab pokemon={pokemon} />
-
+export const TabNavigator = () => {
   return (
     <Tab.Navigator
       sceneContainerStyle={{ backgroundColor: '#fff' }}
@@ -28,10 +17,10 @@ export const TabNavigator = ({ pokemon }: Props) => {
         tabBarStyle: { elevation: 1 },
       }}
     >
-      <Tab.Screen name="About" component={AboutScreen} />
-      <Tab.Screen name="Base Stats" component={StatsScreen} />
-      <Tab.Screen name="Evolution" component={EvolutionScreen} />
-      <Tab.Screen name="Moves" component={SearchScreen} />
+      <Tab.Screen name="About" component={AboutTab} />
+      <Tab.Screen name="Base Stats" component={StatsTab} />
+      <Tab.Screen name="Evolution" component={EvolutionTab} />
+      <Tab.Screen name="Moves" component={EvolutionTab} />
     </Tab.Navigator>
   )
 }
