@@ -1,30 +1,36 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Text, View, StyleSheet } from 'react-native';
-import { Pokemon, PokemonState } from '../../types/pokemon';
+import { Store } from '../../context/store';
 
-export const AboutTab = ({ pokemon }: { pokemon: PokemonState | null }) => {
-  console.log('SE EJECUTAN LOS TABS')
+export const AboutTab = () => {
+  const { state } = useContext(Store)
+  const about = state.pokemon.about
+
+  if (!about) {
+    return null
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
         <Text style={styles.label}>Weight: </Text>
-        <Text>{pokemon?.about.weight}</Text>
+        <Text>{about.weight}</Text>
       </View>
       <View style={styles.wrapper}>
         <Text style={styles.label}>Height: </Text>
-        <Text>{pokemon?.about.height}</Text>
+        <Text>{about.height}</Text>
       </View>
       <View style={styles.wrapper}>
         <Text style={styles.label}>Habitat: </Text>
-        <Text>{pokemon?.species.habitat.name}</Text>
+        <Text>{about.habitat.name}</Text>
       </View>
       <View style={styles.wrapper}>
         <Text style={styles.label}>Abilities: </Text>
-        <Text>{pokemon?.about.abilities.map(t => t.ability.name + ', ')}</Text>
+        <Text>{about.abilities.map(t => t.ability.name + ', ')}</Text>
       </View>
       <View style={styles.wrapper}>
         <Text style={styles.label}>Egg Groups: </Text>
-        <Text>{pokemon?.species.egg_groups.map(t => t.name)}</Text>
+        <Text>{about.egg_groups.map(t => t.name)}</Text>
       </View>
     </View>
   )

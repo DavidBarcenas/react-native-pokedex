@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '../navigation/StackNavigator';
 import { Image, Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 import { usePokemon } from '../hooks/usePokemon';
 import { Header } from '../components/pokemon/Header';
 import { TabNavigator } from '../navigation/TabNavigator';
+import { Store } from '../context/store';
 
 type Props = StackScreenProps<RootStackParams, 'Pokemon'>
 
