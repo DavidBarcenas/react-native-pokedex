@@ -1,11 +1,16 @@
-import { useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
+
 import { baseUrlPokeAPI, pokeAPI, pokemonSprite } from '../api/pokeapi';
-import { Result, PokemonCustom, PokemonsResponse } from '../types/pokemonList';
-import { RequestStatus } from "../types/requestStatus";
+import { Store } from "../context/store";
+
+import type { Result, PokemonCustom, PokemonsResponse } from '../types/pokemonList';
+import type { RequestStatus } from "../types/requestStatus";
 
 export const usePokemons = () => {
     const [status, setStatus] = useState<RequestStatus>('idle')
     const [pokemons, setPokemons] = useState<PokemonCustom[]>([])
+    const { dispatch } = useContext(Store)
+
     const urlAllPokemons = useRef(`${baseUrlPokeAPI}/pokemon?limit=20`)
 
     const buildPokemonCustom = (list: Result[]) => {
@@ -21,6 +26,7 @@ export const usePokemons = () => {
 
         setPokemons([...pokemons, ...appendPokemons])
         setStatus('success')
+        dispatch({type: 'SET_POKEMONS', payload: pokemons})
     }
 
     const getPokemons = async () => {

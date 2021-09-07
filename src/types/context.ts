@@ -1,5 +1,6 @@
-import { Pokemon } from "./pokemon"
-import { Species } from "./species"
+import type { PokemonCustom } from './pokemonList';
+import type { Pokemon } from "./pokemon"
+import type { Species } from "./species"
 
 export type StoreProps = {
   state: StateProps
@@ -11,8 +12,9 @@ export type ProviderProps = {
 }
 
 export type StateProps = {
+  pokemons: PokemonCustom[]
   pokemon: {
-    about: About
+    about: About,
   }
 }
 
@@ -22,4 +24,5 @@ export type About =
   | null
 
 export type ActionProps = 
+  | {type: 'SET_POKEMONS', payload: PokemonCustom[]}
   | {type: 'SET_ABOUT', payload: About}

@@ -1,6 +1,7 @@
 import React, { createContext, useReducer } from "react";
-import { ProviderProps, StoreProps } from "../types/context";
+
 import { initialState, stateReducer } from "./reducer";
+import type { ProviderProps, StoreProps } from "../types/context";
 
 export const Store = createContext({} as StoreProps)
 

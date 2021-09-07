@@ -1,22 +1,20 @@
 import React from 'react'
-import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { usePokemons } from '../hooks/usePokemons';
 import { PokedexItem } from '../components/PokedexItem';
 import { Pokeball } from '../components/Pokeball';
+import { Spinner } from '../components/Spinner';
+
 import { colors } from '../theme/colors';
 
 export const PokedexScreen = () => {
     const { pokemons, getPokemons, status } = usePokemons()
 
     if (status === 'loading' && pokemons.length === 0) {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center' }}>
-                <ActivityIndicator color={colors.red} size={30} />
-            </View>
-        )
+        return <Spinner />
     }
 
     if (status === 'error' || (status === 'success' && pokemons.length === 0)) {
@@ -44,7 +42,7 @@ export const PokedexScreen = () => {
                             <Text style={styles.title}>Pokédex</Text>
                         </View>
                     }
-                    ListFooterComponent={<ActivityIndicator color={colors.red} size={30} />}
+                    ListFooterComponent={<Spinner />}
                     columnWrapperStyle={{ justifyContent: 'space-evenly' }}
                     removeClippedSubviews
                     numColumns={2}
@@ -52,7 +50,6 @@ export const PokedexScreen = () => {
             </View>
         </SafeAreaView>
     )
-
 }
 
 const styles = StyleSheet.create({
