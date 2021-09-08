@@ -40,8 +40,8 @@ export const EvolutionTab = () => {
       {
         evolutions.map((e: any) => (
           <View key={e.name}>
-            <Image source={{ uri: e.picture }} style={{ width: 250, height: 250 }} />
-            <Text>{e.picture}</Text>
+            <Image source={{ uri: e.picture }} style={{ width: 100, height: 100 }} />
+            <Text>{e.name}</Text>
           </View>
         ))
       }

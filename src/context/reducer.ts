@@ -5,7 +5,8 @@ export const initialState: StateProps = {
   pokemon: {
     about: null,
     stats: [],
-    evolution: null
+    evolution: null,
+    moves: []
   }
 }
 
@@ -41,6 +42,15 @@ export const stateReducer = (state: StateProps, action: ActionProps): StateProps
         pokemon: {
           ...state.pokemon,
           evolution: action.payload
+        }
+      }
+    
+    case 'SET_MOVES':
+      return {
+        ...state, 
+        pokemon: {
+          ...state.pokemon,
+          moves: action.payload
         }
       }
   

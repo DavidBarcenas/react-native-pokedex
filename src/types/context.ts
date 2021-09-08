@@ -1,5 +1,5 @@
 import type { PokemonCustom } from './pokemonList';
-import type { Pokemon, Stat } from "./pokemon"
+import type { Move, Pokemon, Stat } from "./pokemon"
 import type { Species } from "./species"
 import type { Evolution } from './evolution';
 
@@ -18,6 +18,7 @@ export type StateProps = {
     about: About
     stats: Stat[]
     evolution: Evolution | null
+    moves: Move[]
   }
 }
 
@@ -31,3 +32,4 @@ export type ActionProps =
   | {type: 'SET_ABOUT', payload: About}
   | {type: 'SET_STATS', payload: Stat[]}
   | {type: 'SET_EVOLUTION', payload: Evolution | null}
+  | {type: 'SET_MOVES', payload: Move[]}

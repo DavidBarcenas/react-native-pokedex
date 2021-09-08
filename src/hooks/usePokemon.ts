@@ -38,6 +38,11 @@ export const usePokemon = (id: string) => {
                 payload: data[1].data
             })
             
+            dispatch({
+                type: 'SET_MOVES',
+                payload: data[0].data.moves
+            })
+            
             setPokemon({
                 about: data[0].data,
                 evolution: data[1].data,
