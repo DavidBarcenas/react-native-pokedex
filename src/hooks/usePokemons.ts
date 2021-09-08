@@ -23,10 +23,10 @@ export const usePokemons = () => {
 
             return { id, picture, name }
         })
-
+        
         setPokemons([...pokemons, ...appendPokemons])
+        dispatch({type: 'SET_POKEMONS', payload: [...pokemons, ...appendPokemons]})
         setStatus('success')
-        dispatch({type: 'SET_POKEMONS', payload: pokemons})
     }
 
     const getPokemons = async () => {
