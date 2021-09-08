@@ -1,4 +1,5 @@
 export const colors = {
   red: '#fc6c6d',
-  tabIndicator: '#ccc'
+  gray:'#999',
+  tabIndicator: '#ccc',
 }

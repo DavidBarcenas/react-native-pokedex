@@ -1,24 +1,35 @@
 import React, { useContext } from 'react'
 import { Text, View, StyleSheet } from 'react-native';
+
 import { Store } from '../../context/store';
+import { NoDetailsFound } from './NoDetailsFound';
+import { calculateHeight, calculateweight } from '../../utils/convertUnits';
+import { colors } from '../../theme/colors';
 
 export const AboutTab = () => {
   const { state } = useContext(Store)
   const about = state.pokemon.about
 
   if (!about) {
-    return null
+    return (
+      <NoDetailsFound
+        message='No information was found about this pokemon.'
+      />
+    )
   }
+
+  const { feet, cm } = calculateHeight(about.height)
+  const { lbs, kg } = calculateweight(about.weight)
 
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
         <Text style={styles.label}>Weight: </Text>
-        <Text>{about.weight}</Text>
+        <Text>{lbs} {kg}</Text>
       </View>
       <View style={styles.wrapper}>
         <Text style={styles.label}>Height: </Text>
-        <Text>{about.height}</Text>
+        <Text>{feet} {cm}</Text>
       </View>
       <View style={styles.wrapper}>
         <Text style={styles.label}>Habitat: </Text>
@@ -26,11 +37,11 @@ export const AboutTab = () => {
       </View>
       <View style={styles.wrapper}>
         <Text style={styles.label}>Abilities: </Text>
-        <Text>{about.abilities.map(t => t.ability.name + ', ')}</Text>
+        <Text>{about.abilities.map(({ ability }) => ability.name)}</Text>
       </View>
       <View style={styles.wrapper}>
         <Text style={styles.label}>Egg Groups: </Text>
-        <Text>{about.egg_groups.map(t => t.name)}</Text>
+        <Text>{about.egg_groups.map(({ name }) => name)}</Text>
       </View>
     </View>
   )
@@ -47,6 +58,6 @@ const styles = StyleSheet.create({
   },
   label: {
     minWidth: 100,
-    color: '#999'
+    color: colors.gray
   }
 })

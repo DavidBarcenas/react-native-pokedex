@@ -11,7 +11,6 @@ export const EvolutionTab = () => {
 
   const extractEvolution = () => {
     let evoChain = pokemon.evolution?.chain
-    console.log(evoChain)
 
     do {
       if (evoChain) {
