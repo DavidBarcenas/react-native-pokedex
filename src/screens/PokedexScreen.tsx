@@ -41,16 +41,16 @@ export const PokedexScreen = () => {
                     showsVerticalScrollIndicator={false}
                     onEndReached={getPokemons}
                     onEndReachedThreshold={0.4}
+                    ListFooterComponent={<Spinner />}
+                    columnWrapperStyle={{ justifyContent: 'space-evenly' }}
+                    removeClippedSubviews
+                    numColumns={2}
                     ListHeaderComponent={
                         <View style={styles.titleContainer}>
                             <Pokeball size={180} position={-50} />
                             <Text style={styles.title}>Pokédex</Text>
                         </View>
                     }
-                    ListFooterComponent={<Spinner />}
-                    columnWrapperStyle={{ justifyContent: 'space-evenly' }}
-                    removeClippedSubviews
-                    numColumns={2}
                 />
             </View>
         </SafeAreaView>

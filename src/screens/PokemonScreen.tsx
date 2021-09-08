@@ -21,7 +21,7 @@ export const PokemonScreen = ({ route }: Props) => {
                 picture={pokemonItem.picture}
                 name={pokemonItem.name}
                 id={pokemonItem.id}
-                types={pokemon?.about.types}
+                types={pokemon?.types}
             />
             <View style={styles.tabsContainer}>
                 {status === 'loading' && <Spinner />}

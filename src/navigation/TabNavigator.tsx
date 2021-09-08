@@ -6,6 +6,8 @@ import { StatsTab } from '../components/pokemon/StatsTab';
 import { EvolutionTab } from '../components/pokemon/EvolutionTab';
 import { MovesTab } from '../components/pokemon/MovesTab';
 
+import { colors } from '../theme/colors';
+
 const Tab = createMaterialTopTabNavigator();
 
 export const TabNavigator = () => {
@@ -13,7 +15,7 @@ export const TabNavigator = () => {
     <Tab.Navigator
       sceneContainerStyle={{ backgroundColor: '#fff' }}
       screenOptions={{
-        tabBarIndicatorStyle: { backgroundColor: '#ccc', },
+        tabBarIndicatorStyle: { backgroundColor: colors.tabIndicator, },
         tabBarLabelStyle: { textTransform: 'capitalize' },
         tabBarStyle: { elevation: 1 },
       }}

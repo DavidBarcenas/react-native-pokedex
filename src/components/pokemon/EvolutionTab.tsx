@@ -1,7 +1,5 @@
 import React, { useContext, useEffect } from 'react'
 import { Text, View, Image } from 'react-native';
-import { PokemonState } from '../../types/pokemon';
-import { pokeAPI } from '../../api/pokeapi';
 import { Store } from '../../context/store';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -13,6 +11,7 @@ export const EvolutionTab = () => {
 
   const extractEvolution = () => {
     let evoChain = pokemon.evolution?.chain
+    console.log(evoChain)
 
     do {
       if (evoChain) {
@@ -22,7 +21,7 @@ export const EvolutionTab = () => {
           name: evoChain.species.name,
           min_level: !details ? 1 : details.min_level,
           trigger_name: !details ? null : details.trigger.name,
-          picture: pokemons.length ? pokemons.filter(x => x.name === evoChain?.species.name)[0].picture : null
+          picture: pokemons.length ? pokemons.filter(x => x.name === evoChain?.species.name)[0]?.picture : null
         }]
 
         evoChain = evoChain['evolves_to'][0]

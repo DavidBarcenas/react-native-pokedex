@@ -1,12 +1,3 @@
-import { Evolution } from "./evolution"
-import { Species } from "./species"
-
-export type PokemonState = {
-    about: Pokemon
-    evolution: Evolution,
-    species: Species
-}
-
 export type Pokemon = {
     id: number
     name: string
