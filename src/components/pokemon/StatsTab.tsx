@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Text, View, StyleSheet } from 'react-native';
-import { PokemonState } from '../../types/pokemon'
+import { Store } from '../../context/store';
 
-export const StatsTab = ({ pokemon }: { pokemon: PokemonState | null }) => {
-  const total = pokemon?.about.stats.reduce((prev, curr) => prev + curr.base_stat, 0) || 0
+export const StatsTab = () => {
+  const { state } = useContext(Store)
+  const stats = state.pokemon.stats
+  const total = stats.reduce((prev, curr) => prev + curr.base_stat, 0) || 0
 
   return (
     <View style={styles.container}>
       {
-        pokemon?.about.stats.map(s => (
+        stats.map(s => (
           <Stat key={s.stat.name} name={s.stat.name} baseStat={s.base_stat} percetange={150} />
         ))
       }

@@ -11,7 +11,6 @@ import { Spinner } from '../components/Spinner';
 type Props = StackScreenProps<RootStackParams, 'Pokemon'>
 
 export const PokemonScreen = ({ route }: Props) => {
-    console.log('re render')
     const { pokemonItem, color } = route.params
     const { pokemon, status } = usePokemon(pokemonItem.id)
 

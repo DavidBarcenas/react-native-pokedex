@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 
 import { baseUrlPokeAPI, pokeAPI } from "../api/pokeapi"
 import { Store } from "../context/store"
+import { mapToAbout } from "../utils/mapper"
 
 import type { RequestStatus } from "../types/requestStatus"
 import type { Pokemon, PokemonState } from "../types/pokemon"
@@ -24,13 +25,12 @@ export const usePokemon = (id: string) => {
 
             dispatch({
                 type: 'SET_ABOUT',
-                payload: {
-                    abilities: data[0].data.abilities,
-                    weight: data[0].data.weight,
-                    height: data[0].data.height,
-                    egg_groups: data[2].data.egg_groups,
-                    habitat: data[2].data.habitat,
-                }
+                payload: mapToAbout(data[0].data, data[2].data)
+            })
+            
+            dispatch({
+                type: 'SET_STATS',
+                payload: data[0].data.stats
             })
             
             setPokemon({

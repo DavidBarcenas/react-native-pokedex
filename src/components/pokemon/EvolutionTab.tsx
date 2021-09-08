@@ -24,7 +24,6 @@ export const EvolutionTab = ({ pokemon }: { pokemon: PokemonState | null }) => {
     } while (!!evoChain && evoChain.hasOwnProperty('evolves_to'));
   }
   extractEvolution()
-  console.log(evolutions)
 
   return (
     <View>
