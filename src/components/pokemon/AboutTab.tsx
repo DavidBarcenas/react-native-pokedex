@@ -20,28 +20,30 @@ export const AboutTab = () => {
 
   const { feet, cm } = calculateHeight(about.height)
   const { lbs, kg } = calculateweight(about.weight)
+  const abilities = about.abilities.map(({ ability }) => ability.name).join(', ')
+  const eggGroups = about.egg_groups.map(({ name }) => name).join(', ')
 
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
-        <Text style={styles.label}>Weight: </Text>
+        <Text style={styles.label}>Weight:</Text>
         <Text>{lbs} {kg}</Text>
       </View>
       <View style={styles.wrapper}>
-        <Text style={styles.label}>Height: </Text>
+        <Text style={styles.label}>Height:</Text>
         <Text>{feet} {cm}</Text>
       </View>
       <View style={styles.wrapper}>
-        <Text style={styles.label}>Habitat: </Text>
-        <Text>{about.habitat.name}</Text>
+        <Text style={styles.label}>Habitat:</Text>
+        <Text style={styles.value}>{about.habitat.name}</Text>
       </View>
       <View style={styles.wrapper}>
-        <Text style={styles.label}>Abilities: </Text>
-        <Text>{about.abilities.map(({ ability }) => ability.name)}</Text>
+        <Text style={styles.label}>Abilities:</Text>
+        <Text style={styles.value}>{abilities}</Text>
       </View>
       <View style={styles.wrapper}>
-        <Text style={styles.label}>Egg Groups: </Text>
-        <Text>{about.egg_groups.map(({ name }) => name)}</Text>
+        <Text style={styles.label}>Egg Groups:</Text>
+        <Text style={styles.value}>{eggGroups}</Text>
       </View>
     </View>
   )
@@ -57,7 +59,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   label: {
-    minWidth: 100,
+    minWidth: 120,
     color: colors.gray
+  },
+  value: {
+    textTransform: 'capitalize',
   }
 })
