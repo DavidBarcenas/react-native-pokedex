@@ -1,35 +1,16 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import { Text, View, Image } from 'react-native';
-import { Store } from '../../context/store';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useEvolution } from '../../hooks/useEvolution';
 
 export const EvolutionTab = () => {
-  const { state } = useContext(Store)
-  const { pokemons, pokemon } = state
+  const { evolutions } = useEvolution()
 
-  let evolutions: any = []
+  const hasNoEvolutions = evolutions.length <= 1
+  const hasAnEvolution = evolutions.length == 2
+  const hasTwoEvolution = evolutions.length >= 2
 
-  const extractEvolution = () => {
-    let evoChain = pokemon.evolution?.chain
-
-    do {
-      if (evoChain) {
-        const details = evoChain['evolution_details'][0]
-
-        evolutions = [...evolutions, {
-          name: evoChain.species.name,
-          min_level: !details ? 1 : details.min_level,
-          trigger_name: !details ? null : details.trigger.name,
-          picture: pokemons.length ? pokemons.filter(x => x.name === evoChain?.species.name)[0]?.picture : null
-        }]
-
-        evoChain = evoChain['evolves_to'][0]
-      }
-    } while (!!evoChain && evoChain.hasOwnProperty('evolves_to'));
-  }
-  extractEvolution()
-
-  if (evolutions === []) {
+  if (hasNoEvolutions) {
     return null
   }
 
