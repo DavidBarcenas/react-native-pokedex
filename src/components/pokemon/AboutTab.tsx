@@ -25,6 +25,7 @@ export const AboutTab = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.falvorText}>{about.flavorText}</Text>
       <View style={styles.wrapper}>
         <Text style={styles.label}>Weight:</Text>
         <Text>{lbs} {kg}</Text>
@@ -53,13 +54,16 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 25
   },
+  falvorText: {
+    marginBottom: 20
+  },
   wrapper: {
     display: 'flex',
     flexDirection: 'row',
     marginBottom: 10,
   },
   label: {
-    minWidth: 120,
+    minWidth: 110,
     color: colors.gray
   },
   value: {

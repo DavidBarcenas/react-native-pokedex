@@ -22,9 +22,10 @@ export type StateProps = {
   }
 }
 
-export type About = 
-  Pick<Species, 'egg_groups' | 'habitat'> & 
-  Pick<Pokemon, 'weight' | 'height' | 'abilities'> 
+export type About = {
+  flavorText: string
+} & Pick<Species, 'egg_groups' | 'habitat'> 
+  & Pick<Pokemon, 'weight' | 'height' | 'abilities'> 
   | null
 
 export type ActionProps = 
