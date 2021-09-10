@@ -35,7 +35,7 @@ export const AboutTab = () => {
       </View>
       <View style={styles.wrapper}>
         <Text style={styles.label}>Habitat:</Text>
-        <Text style={styles.value}>{about.habitat.name}</Text>
+        <Text style={styles.value}>{about.habitat?.name}</Text>
       </View>
       <View style={styles.wrapper}>
         <Text style={styles.label}>Abilities:</Text>

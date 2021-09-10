@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 15,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    paddingBottom: 15
   },
   evolution: {
   },
@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
   },
   pokeball: {
     position: 'absolute',
-    width: 100,
-    height: 100,
+    width: 105,
+    height: 105,
     opacity: .1
   },
   name: {
