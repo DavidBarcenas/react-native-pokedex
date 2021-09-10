@@ -1,29 +1,26 @@
 import React from 'react'
-import { Text, View, Image } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native';
+
 import { useEvolution } from '../../hooks/useEvolution';
+import { EvolutionGroup } from './EvolutionGroup';
+import { NoDetailsFound } from './NoDetailsFound';
 
 export const EvolutionTab = () => {
   const { evolutions } = useEvolution()
 
   const hasNoEvolutions = evolutions.length <= 1
-  const hasAnEvolution = evolutions.length == 2
-  const hasTwoEvolution = evolutions.length >= 2
+  const hasTwoEvolution = evolutions.length > 2
 
   if (hasNoEvolutions) {
-    return null
+    return <NoDetailsFound message='No evolutions found.' />
   }
 
   return (
-    <ScrollView>
-      {
-        evolutions.map((e: any) => (
-          <View key={e.name}>
-            <Image source={{ uri: e.picture }} style={{ width: 100, height: 100 }} />
-            <Text>{e.name}</Text>
-          </View>
-        ))
-      }
+    <ScrollView style={{ padding: 10 }}>
+      <EvolutionGroup evolutions={evolutions} positions={[0, 1]} />
+      {hasTwoEvolution && (
+        <EvolutionGroup evolutions={evolutions} positions={[1, 2]} />
+      )}
     </ScrollView>
   )
 }

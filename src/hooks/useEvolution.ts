@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from "react"
 import { Store } from "../context/store"
 
-type Evolution = {
+export type EvolutionProps = {
   name: string,
-  level: number
+  level?: string
   picture: string | null
 }
 
 export const useEvolution = () => {
-  const [evolutions, setEvolutions] = useState<Evolution[]>([])
+  const [evolutions, setEvolutions] = useState<EvolutionProps[]>([])
   const { state } = useContext(Store)
   const { pokemons, pokemon } = state
 
@@ -19,9 +19,9 @@ export const useEvolution = () => {
       if (evolutionChain) {
         const details = evolutionChain['evolution_details'][0]
         
-        let evolution: Evolution = {
+        let evolution: EvolutionProps = {
           name: evolutionChain.species.name,
-          level: !details ? 1 : details.min_level,
+          level: !details?.min_level ? '' : details.min_level.toString(),
           picture: pokemons.length ? pokemons.filter(x => x.name === evolutionChain?.species.name)[0]?.picture : null
         }
         

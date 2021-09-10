@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { TouchableOpacity, StyleSheet, Image, Animated } from 'react-native';
+import { TouchableOpacity, StyleSheet, Image } from 'react-native';
 
 import { PokemonCustom } from '../types/pokemonList'
 import { getImageColors } from '../utils/getColors'
@@ -15,7 +15,6 @@ const PokemonCard = ({ item }: Props) => {
     const [background, setBackground] = useState(DEFAULT_COLOR)
     const { picture, name, id } = item
     const { navigate } = useNavigation()
-    const isMounted = useRef(true)
 
     const getPictureColors = useCallback(
         async () => {
@@ -26,11 +25,13 @@ const PokemonCard = ({ item }: Props) => {
     )
 
     useEffect(() => {
-        if (!isMounted.current) { return; }
-        getPictureColors()
+        let isMounted = true
+        if (isMounted) {
+            getPictureColors()
+        }
 
         return () => {
-            isMounted.current = false
+            isMounted = false
         }
     }, [])
 
