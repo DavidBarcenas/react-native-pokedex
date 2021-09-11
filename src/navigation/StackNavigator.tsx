@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
-import { HomeScreen } from '../screens/HomeScreen';
+// import { HomeScreen } from '../screens/HomeScreen';
 import { PokedexScreen } from '../screens/PokedexScreen';
 import { PokemonScreen } from '../screens/PokemonScreen';
 import { SearchScreen } from '../screens/SearchScreen';
@@ -29,7 +29,7 @@ export const StackNavigator = () => {
                 cardStyle: { backgroundColor: '#fff' }
             }}
         >
-            <Stack.Screen name="Home" component={HomeScreen} />
+            {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
             <Stack.Screen name="Pokedex" component={PokedexScreen} />
             <Stack.Screen name="Pokemon" component={PokemonScreen} />
             <Stack.Screen name="Search" component={SearchScreen} />
