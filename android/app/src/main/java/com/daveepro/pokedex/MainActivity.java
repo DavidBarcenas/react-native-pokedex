@@ -1,4 +1,5 @@
-package com.pokedex;
+// package com.pokedex;
+package com.daveepro.pokedex;
 
 import android.os.Bundle;
 import org.devio.rn.splashscreen.SplashScreen;
